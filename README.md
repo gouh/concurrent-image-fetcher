@@ -1,64 +1,58 @@
-# Proyecto de Descarga Concurrente de Imágenes
+# Descarga Concurrente de Imágenes con Go y React
 
-Este proyecto es una aplicación web diseñada para descargar imágenes desde múltiples URLs de manera concurrente, permitiendo al usuario especificar el número deseado de descargas concurrentes. La aplicación backend está desarrollada en Go, aprovechando sus capacidades para operaciones concurrentes, mientras que el frontend se implementa en React, ofreciendo una interfaz de usuario interactiva y atractiva.
+Este proyecto es una solución al desafío de desarrollar una aplicación en Go que descargue imágenes de múltiples URLs simultáneamente, permitiendo al usuario configurar el número deseado de descargas concurrentes. Utiliza Go para el backend y React para el frontend, implementando principios REST y mejores prácticas de desarrollo moderno.
 
-## Características
+## Características Principales
 
-- Validación y manejo de URLs de entrada.
-- Limitación configurable del número de descargas concurrentes.
-- Sistema robusto para manejar errores durante las descargas.
-- Indicadores de progreso de descarga en tiempo real.
-- Interfaz de usuario React para interacción con el servicio.
-- Contenerización con Docker para fácil despliegue y distribución.
+- **Descargas Concurrentes Configurables**: Permite al usuario establecer y modificar el límite de descargas concurrentes.
+- **Indicador de Progreso**: Ofrece información detallada sobre el progreso de cada descarga.
+- **Manejo de Errores**: Asegura respuestas HTTP adecuadas en caso de fallos en las descargas.
+- **Interfaz de Usuario con React**: Proporciona una experiencia de usuario fluida y responsiva para la interacción con la aplicación.
 
-## Requisitos Previos
+## Tecnologías Utilizadas
 
-Para construir y ejecutar esta aplicación, necesitarás:
+- **Backend**: Go
+- **Frontend**: React
+- **Mensajería en Tiempo Real**: Redis/PubSub
+- **Persistencia de Datos**: MariaDB
+- **Contenerización**: Docker
 
-- Go (versión 1.16 o superior)
-- Node.js y npm (para el frontend React)
-- Docker
+## Instrucciones de Instalación
 
-## Instalación
+1. **Clonar el Repositorio**
 
-### Backend (Go)
+```bash
+git clone https://github.com/gouh/concurrent-image-fetcher.git
+cd concurrent-image-fetcher
+```
 
-1. Clona el repositorio y navega al directorio del backend.
-2. Ejecuta `go build` para compilar el proyecto.
-3. Inicia el servidor ejecutando el binario compilado, por ejemplo, `./miAplicacion`.
+2. **Levantar los Servicios con Docker Compose**
 
-### Frontend (React)
+```bash
+docker-compose up -d
+```
 
-1. Navega al directorio del frontend.
-2. Ejecuta `npm install` para instalar las dependencias.
-3. Inicia la aplicación React con `npm start`.
+Este comando inicia todos los servicios necesarios (backend, frontend, Redis, MariaDB) en contenedores Docker.
 
-### Uso de Docker
+## Acceder al Proyecto
 
-1. En la raíz del proyecto, construye la imagen de Docker con `docker build -t nombre-de-tu-imagen .`.
-2. Ejecuta el contenedor usando `docker run -p 4000:4000 nombre-de-tu-imagen`, ajustando los puertos según sea necesario.
+Una vez que los contenedores estén arriba y corriendo, podrás acceder a la aplicación web a través de:
 
-## Uso
+- **Frontend**: http://localhost:8080/app
+- **API Backend**: http://localhost:8080/api/v1
 
-### Cargar URLs de Imágenes
+## Despliegue
 
-- Accede a la interfaz de usuario de React en `http://localhost:3000` (ajusta el puerto según tu configuración).
-- Usa el formulario proporcionado para introducir o cargar las URLs de las imágenes que deseas descargar.
+Este proyecto está configurado para facilitar su despliegue con Docker, asegurando una instalación y ejecución consistentes en cualquier entorno.
 
-### Configuración de Descargas Concurrentes
+## Contribuciones
 
-- Utiliza la interfaz de configuración en la página para ajustar el número de descargas concurrentes permitidas.
-
-## Contribuir
-
-Si deseas contribuir a este proyecto, por favor considera:
-
-- Crear un fork del repositorio.
-- Crear una rama para tu característica (`git checkout -b feature/fooBar`).
-- Hacer commit de tus cambios (`git commit -am 'Add some fooBar'`).
-- Hacer push a la rama (`git push origin feature/fooBar`).
-- Abrir una nueva Pull Request.
+Las contribuciones son bienvenidas. Si tienes alguna sugerencia para mejorar la aplicación, por favor, considera enviar un pull request o abrir un issue en el repositorio.
 
 ## Licencia
 
-Este proyecto está licenciado bajo la Licencia MIT - vea el archivo `LICENSE.md` para detalles.
+Este proyecto está licenciado bajo la MIT License - vea el archivo [LICENSE.md](LICENSE.md) para más detalles.
+
+---
+
+Desarrollado con ❤ por Hugo.
