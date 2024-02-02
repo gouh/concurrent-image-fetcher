@@ -6,4 +6,5 @@ type DownloadProgress struct {
 	Progress  float64 `json:"progress"`
 	Completed bool    `json:"completed"`
 	Error     string  `json:"error,omitempty"`
+	Event     string  `json:"event"`
 }
