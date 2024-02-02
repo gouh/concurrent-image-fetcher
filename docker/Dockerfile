@@ -24,7 +24,6 @@ COPY --from=go-builder /root/.env /root/.env
 COPY --from=go-builder /go-binary .
 # Copia los archivos estáticos compilados de React desde la etapa de compilación de React
 COPY --from=react-builder /app/build ./web
-# Asegúrate de que tu servidor Go sirve los archivos desde /root/public
 
 # Expone el puerto en el que tu servidor Go escucha
 EXPOSE 8080
