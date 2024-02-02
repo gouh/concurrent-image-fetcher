@@ -17,7 +17,7 @@ func main() {
 	cont := container.NewContainer(configs)
 	http.SetupRoutes(router, cont)
 	websocket.SetupRoutes(router, cont)
-	err := router.Run(":8090")
+	err := router.Run(":8080")
 	if err != nil {
 		fmt.Println(err.Error())
 	}

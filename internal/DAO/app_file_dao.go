@@ -22,7 +22,7 @@ type (
 
 func (dao *AppFileDao) GetAll(params requests.PaginationRequest) (*int, *[]models.AppFile, error) {
 	var totalItems int
-	countQuery := "SELECT COUNT(*) FROM AppFile"
+	countQuery := "SELECT COUNT(*) FROM app_file"
 	err := dao.db.QueryRow(countQuery).Scan(&totalItems)
 	if err != nil {
 		return nil, nil, err
@@ -34,7 +34,7 @@ func (dao *AppFileDao) GetAll(params requests.PaginationRequest) (*int, *[]model
 	}
 
 	offset := (*params.Page - 1) * *params.PageSize
-	query := `SELECT * FROM AppFile ORDER BY created_at DESC LIMIT ? OFFSET ?`
+	query := `SELECT * FROM app_file ORDER BY created_at DESC LIMIT ? OFFSET ?`
 	rows, err := dao.db.Query(query, *params.PageSize, offset)
 	if err != nil {
 		return nil, nil, err
@@ -57,7 +57,7 @@ func (dao *AppFileDao) GetAll(params requests.PaginationRequest) (*int, *[]model
 }
 
 func (dao *AppFileDao) Get(fileId string) (*models.AppFile, error) {
-	query := `SELECT * FROM AppFile WHERE id = ?`
+	query := `SELECT * FROM app_file WHERE id = ?`
 	var appFile models.AppFile
 
 	err := dao.db.QueryRow(query, fileId).Scan(&appFile.ID, &appFile.Name, &appFile.MimeType, &appFile.Size, &appFile.Path, &appFile.CreatedAt, &appFile.UpdatedAt)
@@ -72,12 +72,12 @@ func (dao *AppFileDao) Get(fileId string) (*models.AppFile, error) {
 }
 
 func (dao *AppFileDao) Delete(fileId string) error {
-	_, err := dao.db.Exec("DELETE FROM AppFile WHERE id = ?", fileId)
+	_, err := dao.db.Exec("DELETE FROM app_file WHERE id = ?", fileId)
 	return err
 }
 
 func (dao *AppFileDao) Save(af models.AppFile) error {
-	query := `INSERT INTO AppFile (id, name, mime_type, size, path) VALUES (?, ?, ?, ?, ?)`
+	query := `INSERT INTO app_file (id, name, mime_type, size, path) VALUES (?, ?, ?, ?, ?)`
 	_, err := dao.db.Exec(query, af.ID, af.Name, af.MimeType, af.Size, af.Path)
 	return err
 }

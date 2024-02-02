@@ -6,6 +6,7 @@ import (
 	"concurrent-image-fetcher/internal/container"
 	"concurrent-image-fetcher/internal/requests"
 	"concurrent-image-fetcher/internal/responses"
+	"concurrent-image-fetcher/internal/utils"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -104,6 +105,15 @@ func (handler *ImageHandler) PostImage(c *gin.Context) {
 	if errAppFile != nil {
 		c.JSON(http.StatusInternalServerError, responses.GetErrorResponse("Error on get app files"))
 	}
+
+	fileMini := fileUUID + "_mini" + filepath.Ext(file.Filename)
+	fileMiniPath := filepath.Join(handler.ImagePath, fileMini)
+	go func() {
+		errResize := utils.ResizeImage(filePath, fileMiniPath)
+		if errResize != nil {
+			fmt.Println(errResize)
+		}
+	}()
 
 	c.JSON(http.StatusCreated, responses.CommonResponse{
 		Data: appFileStored,

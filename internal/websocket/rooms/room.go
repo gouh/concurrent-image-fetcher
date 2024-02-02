@@ -35,7 +35,7 @@ func (room *Room) Listen(ws *websocket.Conn, roomId string) {
 		for {
 			select {
 			case msg := <-pubSub.Channel():
-				err := ws.WriteJSON(msg.Payload)
+				err := ws.WriteMessage(websocket.TextMessage, []byte(msg.Payload))
 				if err != nil {
 					fmt.Println(err.Error())
 				}
